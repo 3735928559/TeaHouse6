@@ -1,7 +1,7 @@
-﻿@model PagedList.IPagedList<TeaHouse.Models.Food>
+﻿@model PagedList.IPagedList<TeaHouse.Models.Choice>
 @using PagedList.Mvc;
 
-<!@model IEnumerable<TeaHouse.Models.Food>
+<!@model IEnumerable<TeaHouse.Models.Choice>
 
 
     @{
@@ -43,16 +43,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.SelectedFood.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FoodType)
+                    @Html.DisplayFor(modelItem => item.SelectedFood.FoodType)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Detail)
+                    @Html.DisplayFor(modelItem => item.SelectedFood.Detail)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @Html.DisplayFor(modelItem => item.SelectedFood.Price)
                 </td>
                 <td>
                     @Html.ActionLink("Add to Order", "Create", new { id = item.Id }) |

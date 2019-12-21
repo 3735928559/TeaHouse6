@@ -5,14 +5,14 @@
 
 
     @{
-        ViewBag.Title = "Tea House Menu Management";
+        ViewBag.Title = "1. Select your Choice";
     }
 
-    <h2>Tea House Menu Management</h2>
+                        <h2>1. Select your Choice</h2>
 
     
 
-    @using (Html.BeginForm("Index", "Food", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Choice", FormMethod.Get))
     {
         <p>
             Search Keyword: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Search" />
