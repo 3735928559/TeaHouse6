@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\OrderContextInit.cs" />
@@ -270,19 +271,11 @@
     <Content Include="Views\Food\Details.cshtml" />
     <Content Include="Views\Food\Edit.cshtml" />
     <Content Include="Views\Food\Index.cshtml" />
-    <Content Include="Views\Bill\Create.cshtml" />
-    <Content Include="Views\Bill\Delete.cshtml" />
-    <Content Include="Views\Bill\Details.cshtml" />
-    <Content Include="Views\Bill\Edit.cshtml" />
-    <Content Include="Views\Bill\Index.cshtml" />
-    <Content Include="Views\Bill\Add.cshtml" />
-    <Content Include="Views\Bill\FoodDetails.cshtml" />
-    <Content Include="Views\Selection\Create.cshtml" />
-    <Content Include="Views\Selection\Delete.cshtml" />
-    <Content Include="Views\Selection\Details.cshtml" />
-    <Content Include="Views\Selection\Edit.cshtml" />
-    <Content Include="Views\Selection\Index.cshtml" />
-    <Content Include="Views\Bill\Selected.cshtml" />
+    <Content Include="Views\Choice\Create.cshtml" />
+    <Content Include="Views\Choice\Delete.cshtml" />
+    <Content Include="Views\Choice\Details.cshtml" />
+    <Content Include="Views\Choice\Edit.cshtml" />
+    <Content Include="Views\Choice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

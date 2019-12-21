@@ -24,14 +24,17 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Order Menu", "Index", "Bill")</li>
-                    
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                    <li>@Html.ActionLink("1.Select your Choice", "Index", "Choice")</li>
+
                     @if (HttpContext.Current.User.Identity.Name == "Administrator")
                     {
                         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
 
                         <li>@Html.ActionLink("Menu Administration", "Index", "Food")</li>
 
+                    }
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
