@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ChoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderModelController.cs" />
     <Compile Include="DAL\OrderContextInit.cs" />
     <Compile Include="DTO\MenuDTO.cs" />
     <Compile Include="DTO\MenuDTOController.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\OrderContext.cs" />
+    <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -276,6 +278,11 @@
     <Content Include="Views\Choice\Details.cshtml" />
     <Content Include="Views\Choice\Edit.cshtml" />
     <Content Include="Views\Choice\Index.cshtml" />
+    <Content Include="Views\OrderModel\Create.cshtml" />
+    <Content Include="Views\OrderModel\Delete.cshtml" />
+    <Content Include="Views\OrderModel\Details.cshtml" />
+    <Content Include="Views\OrderModel\Edit.cshtml" />
+    <Content Include="Views\OrderModel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

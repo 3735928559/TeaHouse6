@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,42 @@ namespace TeaHouse.Controllers
         private OrderContext db = new OrderContext();
 
         // GET: Choice
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Choices.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
+            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_asc" : "";
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var food = from s in db.FoodMenu select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                food = food.Where(s => s.Name.Contains(searchString) || s.FoodType.Contains(searchString) || s.Detail.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_asc": food = food.OrderBy(s => s.Name); break;
+                case "type_asc": food = food.OrderBy(s => s.FoodType); break;
+                case "price_asc": food = food.OrderBy(s => s.Price); break;
+                default: food = food.OrderBy(s => s.Name); break;
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(food.ToPagedList(pageNumber, pageSize));
+
+            //return View(food.ToList());
         }
 
         // GET: Choice/Details/5
@@ -46,7 +80,7 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,User,OrderTime,Status")] Choice choice)
+        public ActionResult Create([Bind(Include = "Id,User,OrderTime,Status,Food")] Choice choice)
         {
             if (ModelState.IsValid)
             {

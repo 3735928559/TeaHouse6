@@ -23,7 +23,7 @@ namespace TeaHouse.Models
         public DbSet<Food> FoodMenu { get; set; }
         public DbSet<Choice> Choices { get; set; }
 
-
+        public System.Data.Entity.DbSet<TeaHouse.Models.OrderModels> OrderModels { get; set; }
     }
 
 }

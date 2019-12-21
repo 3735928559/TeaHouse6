@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -20,7 +21,7 @@ namespace TeaHouse.Models
             set { _date = value; }
         }
         public Food SelectedFood { get; set; }
-
+        [DefaultValue("Ordered")]
         public string Status { get;set; }
     }
 }
