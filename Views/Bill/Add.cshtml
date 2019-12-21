@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<TeaHouse.Models.Food>
+@using PagedList.Mvc;
+
+<!@model IEnumerable<TeaHouse.Models.Food>
+
+
+    @{
+        ViewBag.Title = "Add";
+    }
+
+    <h2>Choose your favour</h2>
+
+
+    @using (Html.BeginForm("Index", "Food", FormMethod.Get))
+    {
+        <p>
+            Search Keyword: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Search" />
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Product", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
+            </th>
+            <th>
+                @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
+
+            </th>
+            <th>
+
+                @Html.ActionLink("Descriptions", "Index", new { currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "FoodDetails", new { id = item.Id }) |
+                    @Html.ActionLink("Add to Order", "Selected", new { id = item.Id }) |
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br /> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    <p>
+
+        @Html.ActionLink("Back to Orders", "Create")
+    </p>
