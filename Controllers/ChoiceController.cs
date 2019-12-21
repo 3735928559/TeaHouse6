@@ -16,6 +16,7 @@ namespace TeaHouse.Controllers
         private OrderContext db = new OrderContext();
 
         // GET: Choice
+
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -61,27 +62,24 @@ namespace TeaHouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Choice choice = db.Choices.Find(id);
-            if (choice == null)
+            Food food = db.FoodMenu.Find(id);
+            if (food == null)
             {
                 return HttpNotFound();
             }
-            return View(choice);
+            return View(food);
         }
 
         // GET: Choice/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             return View();
-        }
-
-        // POST: Choice/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,User,OrderTime,Status,Food")] Choice choice)
+        }*/
+        public ActionResult Create(int? id, [Bind(Include = "Id,User,OrderTime,Status,Food")] Choice choice)
         {
+            Food food = db.FoodMenu.Find(id);
+            choice.SelectedFood = food;
+            choice.Status = "Ordered";
             if (ModelState.IsValid)
             {
                 db.Choices.Add(choice);
@@ -91,6 +89,26 @@ namespace TeaHouse.Controllers
 
             return View(choice);
         }
+
+        // POST: Choice/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*public ActionResult Create(int? id, [Bind(Include = "Id,User,OrderTime,Status,Food")] Choice choice)
+        {
+            Food food = db.FoodMenu.Find(id);
+            choice.SelectedFood = food;
+            choice.Status = "Ordered";
+            if (ModelState.IsValid)
+            {
+                db.Choices.Add(choice);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(choice);
+        }*/
 
         // GET: Choice/Edit/5
         public ActionResult Edit(int? id)

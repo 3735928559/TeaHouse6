@@ -283,6 +283,7 @@
     <Content Include="Views\OrderModel\Details.cshtml" />
     <Content Include="Views\OrderModel\Edit.cshtml" />
     <Content Include="Views\OrderModel\Index.cshtml" />
+    <Content Include="Views\OrderModel\OrderView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,14 +5,14 @@
 
 
     @{
-        ViewBag.Title = "1. Select your Choice";
+        ViewBag.Title = "selectorder";
     }
 
-                        <h2>1. Select your Choice</h2>
+    <h2>1. Select your order</h2>
 
-    
+   
 
-    @using (Html.BeginForm("Index", "Choice", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Food", FormMethod.Get))
     {
         <p>
             Search Keyword: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Search" />
@@ -56,8 +56,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Add to Order", "Create", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                   
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                    
 
                 </td>
             </tr>

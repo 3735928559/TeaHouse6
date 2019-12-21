@@ -18,11 +18,20 @@ namespace TeaHouse.Controllers
         // GET: OrderModel
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            string _user = System.Web.HttpContext.Current.User.Identity.Name;
+            //var food = db.Choices.Include(c => c.SelectedFood);
+
+            var food = from c in db.Choices
+                        where (c.User.Equals(_user)) && (c.Status.Equals("Ordered"))
+                               
+                        select c;
+            //return View(food.ToList());
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
             ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_asc" : "";
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
-
+             
             if (searchString != null)
             {
                 page = 1;
@@ -33,25 +42,19 @@ namespace TeaHouse.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var order = from s in db.Choices select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                order = order.Where(s => s.User.Equals(System.Web.HttpContext.Current.User.Identity.Name) || s.SelectedFood.Name.Contains(searchString) || s.SelectedFood.Detail.Contains(searchString));
-            }
-
             switch (sortOrder)
             {
-                case "name_asc": order = order.OrderBy(s => s.SelectedFood.Name); break;
-                case "type_asc": order = order.OrderBy(s => s.SelectedFood.FoodType); break;
-                case "price_asc": order = order.OrderBy(s => s.SelectedFood.Price); break;
-                default: order = order.OrderBy(s => s.SelectedFood.Name); break;
+                case "name_asc": food = food.OrderBy(c => c.SelectedFood.Name); break;
+                case "type_asc": food = food.OrderBy(c => c.SelectedFood.FoodType); break;
+                case "price_asc": food = food.OrderBy(c => c.SelectedFood.Price); break;
+                default: food = food.OrderBy(c => c.SelectedFood.Name); break;
             }
+
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            return View(order.ToPagedList(pageNumber, pageSize));
+            return View(food.ToPagedList(pageNumber, pageSize));
 
-            //return View(Order.ToList());
+
         }
 
         // GET: OrderModel/Details/5
@@ -82,6 +85,7 @@ namespace TeaHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
         {
+                 
             if (ModelState.IsValid)
             {
                 db.OrderModels.Add(orderModels);
@@ -130,25 +134,29 @@ namespace TeaHouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderModels orderModels = db.OrderModels.Find(id);
-            if (orderModels == null)
+            Choice choice = db.Choices.Find(id);
+            if (choice == null)
             {
                 return HttpNotFound();
             }
-            return View(orderModels);
+            return View(choice);
         }
 
-        // POST: OrderModel/Delete/5
+        // POST: Choice/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OrderModels orderModels = db.OrderModels.Find(id);
-            db.OrderModels.Remove(orderModels);
+            Choice choice = db.Choices.Find(id);
+            db.Choices.Remove(choice);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        public ActionResult OrderView()
+        {
+            return View(db.OrderModels);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

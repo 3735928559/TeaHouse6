@@ -20,8 +20,8 @@ namespace TeaHouse.Models
             get { return _date; }
             set { _date = value; }
         }
-        public Food SelectedFood { get; set; }
-        [DefaultValue("Ordered")]
+        public virtual Food SelectedFood { get; set; }
+        
         public string Status { get;set; }
     }
 }

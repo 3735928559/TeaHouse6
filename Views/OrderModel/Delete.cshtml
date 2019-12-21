@@ -1,4 +1,4 @@
-﻿@model TeaHouse.Models.OrderModels
+﻿@model TeaHouse.Models.Choice
 
 @{
     ViewBag.Title = "Delete";
@@ -8,24 +8,35 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>OrderModels</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.User)
+            Product
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.SelectedFood.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OrderTime)
+            Type
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrderTime)
+            @Html.DisplayFor(model => model.SelectedFood.FoodType)
         </dd>
+        <dt>
+            Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectedFood.Price)
+        </dd>
+
+
+
+
 
     </dl>
 
