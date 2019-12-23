@@ -23,5 +23,6 @@ namespace TeaHouse.Models
         public virtual Food SelectedFood { get; set; }
         
         public string Status { get;set; }
+        public int OrderNum { get; set; }
     }
 }

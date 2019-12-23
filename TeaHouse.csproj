@@ -199,6 +199,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912230558074_init.cs" />
+    <Compile Include="Migrations\201912230558074_init.designer.cs">
+      <DependentUpon>201912230558074_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Choice.cs" />
     <Compile Include="Models\Food.cs" />
@@ -284,6 +289,11 @@
     <Content Include="Views\OrderModel\Edit.cshtml" />
     <Content Include="Views\OrderModel\Index.cshtml" />
     <Content Include="Views\OrderModel\OrderView.cshtml" />
+    <Content Include="Views\OrderModel2\Create.cshtml" />
+    <Content Include="Views\OrderModel2\Delete.cshtml" />
+    <Content Include="Views\OrderModel2\Details.cshtml" />
+    <Content Include="Views\OrderModel2\Edit.cshtml" />
+    <Content Include="Views\OrderModel2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +310,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912230558074_init.resx">
+      <DependentUpon>201912230558074_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

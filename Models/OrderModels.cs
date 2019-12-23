@@ -21,7 +21,7 @@ namespace TeaHouse.Models
             get { return _date; }
             set { _date = value; }
         }
-        public virtual Choice Choices { get; set; }
+        public virtual Choice SelectedChoice { get; set; }
 
        
 

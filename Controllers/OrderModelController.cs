@@ -22,7 +22,7 @@ namespace TeaHouse.Controllers
             //var food = db.Choices.Include(c => c.SelectedFood);
 
             var food = from c in db.Choices
-                        where (c.User.Equals(_user)) && (c.Status.Equals("Ordered"))
+                        where (c.User.Equals(_user)) && ((c.Status.Equals("Ordered")) &&(c.OrderNum.Equals(null)))
                                
                         select c;
             //return View(food.ToList());
@@ -83,19 +83,26 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
+        public ActionResult Create([Bind(Include = "Id,User,OrderTime,Choices")] OrderModels orderModels)
         {
-                 
+                  
             if (ModelState.IsValid)
             {
+
+                
                 db.OrderModels.Add(orderModels);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            orderModels.SelectedChoice.Status = "Confirmed";
+            orderModels.SelectedChoice.OrderNum = orderModels.Id;
+            
+            
 
             return View(orderModels);
         }
-
+        
         // GET: OrderModel/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -155,6 +162,12 @@ namespace TeaHouse.Controllers
 
         public ActionResult OrderView()
         {
+            string _user = System.Web.HttpContext.Current.User.Identity.Name;
+            var order = from c in db.OrderModels
+                       where (c.User.Equals(_user))
+
+                       select c;
+
             return View(db.OrderModels);
         }
         protected override void Dispose(bool disposing)

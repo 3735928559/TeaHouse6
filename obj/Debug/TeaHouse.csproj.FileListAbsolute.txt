@@ -452,4 +452,5 @@ C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\bin\Microsoft.Owin.Security.M
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.CopyComplete
-C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csprojAssemblyReference.cache
+C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.Migrations.init.resources
+C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.GenerateResource.cache

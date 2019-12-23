@@ -28,15 +28,16 @@
                     {
                         <li>@Html.ActionLink("1.Select your Choice", "Index", "Choice")</li>
                         <li>@Html.ActionLink("2.Review your Order", "Index", "OrderModel")</li>
+                        <li>@Html.ActionLink("3.View Submitted Orders", "OrderView", "OrderModel")</li>
                     }
-                        @if (HttpContext.Current.User.Identity.Name == "Administrator")
-                        {
-                            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    @if (HttpContext.Current.User.Identity.Name == "Administrator")
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
 
-                            <li>@Html.ActionLink("Menu Administration", "Index", "Food")</li>
+                        <li>@Html.ActionLink("Menu Administration", "Index", "Food")</li>
 
-                        }
-                    
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
