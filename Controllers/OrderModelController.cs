@@ -22,7 +22,7 @@ namespace TeaHouse.Controllers
             //var food = db.Choices.Include(c => c.SelectedFood);
 
             var food = from c in db.Choices
-                        where (c.User.Equals(_user)) && ((c.Status.Equals("Ordered")) &&(c.OrderNum.Equals(null)))
+                        where (c.User.Equals(_user) && c.Status.Equals("Ordered"))
                                
                         select c;
             //return View(food.ToList());
@@ -88,15 +88,27 @@ namespace TeaHouse.Controllers
                   
             if (ModelState.IsValid)
             {
-
-                
                 db.OrderModels.Add(orderModels);
-
                 db.SaveChanges();
+                // orderModels.SelectedChoice.Status = "Confirmed";
+                //orderModels.SelectedChoice.OrderNum = orderModels.Id;
+                string _user = System.Web.HttpContext.Current.User.Identity.Name;
+                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("Update Choices SET OrderNum={orderModels.Id} WHERE User='{_user}' and Status='Ordered'");
+                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("Update Choices SET Status='Confirmed' WHERE User='{_user}' and Status='Ordered'");
+                
+                using (var ctx = new OrderContext())
+                { 
+                    var sql = $"Update Choices SET OrderNum={orderModels.Id} WHERE [User]='{_user}' and Status='Ordered'";
+                    ctx.Database.ExecuteSqlCommand(sql);
+                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand(sql);
+                    sql = $"Update Choices SET Status='Confirmed' WHERE [User]='{_user}' and Status='Ordered'";
+                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand(sql);
+                    ctx.Database.ExecuteSqlCommand(sql);
+                }
+
                 return RedirectToAction("Index");
             }
-            orderModels.SelectedChoice.Status = "Confirmed";
-            orderModels.SelectedChoice.OrderNum = orderModels.Id;
+            
             
             
 
@@ -169,6 +181,47 @@ namespace TeaHouse.Controllers
                        select c;
 
             return View(db.OrderModels);
+        }
+
+        public ActionResult OrderDetails(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            string _user = System.Web.HttpContext.Current.User.Identity.Name;
+            //var food = db.Choices.Include(c => c.SelectedFood);
+
+            var food = from c in db.Choices
+                       where (c.User.Equals(_user) && c.Status.Equals("Ordered"))
+
+                       select c;
+            //return View(food.ToList());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
+            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_asc" : "";
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            switch (sortOrder)
+            {
+                case "name_asc": food = food.OrderBy(c => c.SelectedFood.Name); break;
+                case "type_asc": food = food.OrderBy(c => c.SelectedFood.FoodType); break;
+                case "price_asc": food = food.OrderBy(c => c.SelectedFood.Price); break;
+                default: food = food.OrderBy(c => c.SelectedFood.Name); break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(food.ToPagedList(pageNumber, pageSize));
+
+
         }
         protected override void Dispose(bool disposing)
         {
