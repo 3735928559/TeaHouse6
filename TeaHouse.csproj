@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminOrderController.cs" />
     <Compile Include="Controllers\ChoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,12 +290,12 @@
     <Content Include="Views\OrderModel\Edit.cshtml" />
     <Content Include="Views\OrderModel\Index.cshtml" />
     <Content Include="Views\OrderModel\OrderView.cshtml" />
-    <Content Include="Views\OrderModel2\Create.cshtml" />
-    <Content Include="Views\OrderModel2\Delete.cshtml" />
-    <Content Include="Views\OrderModel2\Details.cshtml" />
-    <Content Include="Views\OrderModel2\Edit.cshtml" />
-    <Content Include="Views\OrderModel2\Index.cshtml" />
     <Content Include="Views\OrderModel\OrderDetails.cshtml" />
+    <Content Include="Views\AdminOrder\Create.cshtml" />
+    <Content Include="Views\AdminOrder\Delete.cshtml" />
+    <Content Include="Views\AdminOrder\Details.cshtml" />
+    <Content Include="Views\AdminOrder\Edit.cshtml" />
+    <Content Include="Views\AdminOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

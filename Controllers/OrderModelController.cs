@@ -20,7 +20,7 @@ namespace TeaHouse.Controllers
         {
             string _user = System.Web.HttpContext.Current.User.Identity.Name;
             //var food = db.Choices.Include(c => c.SelectedFood);
-
+            //var food = db.Choices.Where(c => c.User.Equals(_user) && c.Status.Equals("Ordered")).ToList();
             var food = from c in db.Choices
                         where (c.User.Equals(_user) && c.Status.Equals("Ordered"))
                                
@@ -104,6 +104,7 @@ namespace TeaHouse.Controllers
                     sql = $"Update Choices SET Status='Confirmed' WHERE [User]='{_user}' and Status='Ordered'";
                 //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand(sql);
                     ctx.Database.ExecuteSqlCommand(sql);
+                    
                 }
 
                 return RedirectToAction("Index");
@@ -179,48 +180,15 @@ namespace TeaHouse.Controllers
                        where (c.User.Equals(_user))
 
                        select c;
-
-            return View(db.OrderModels);
+            //var food = db.Choices.Where(c => c.User.Equals(_user) && c.Status.Equals("Ordered")).ToList();
+            return View(order);
         }
 
-        public ActionResult OrderDetails(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult OrderDetails(int? id)
         {
-            string _user = System.Web.HttpContext.Current.User.Identity.Name;
-            //var food = db.Choices.Include(c => c.SelectedFood);
+            var choice = db.Choices.Where(o => o.OrderNum == id).ToList();
 
-            var food = from c in db.Choices
-                       where (c.User.Equals(_user) && c.Status.Equals("Ordered"))
-
-                       select c;
-            //return View(food.ToList());
-
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
-            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_asc" : "";
-            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-            ViewBag.CurrentFilter = searchString;
-
-            switch (sortOrder)
-            {
-                case "name_asc": food = food.OrderBy(c => c.SelectedFood.Name); break;
-                case "type_asc": food = food.OrderBy(c => c.SelectedFood.FoodType); break;
-                case "price_asc": food = food.OrderBy(c => c.SelectedFood.Price); break;
-                default: food = food.OrderBy(c => c.SelectedFood.Name); break;
-            }
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(food.ToPagedList(pageNumber, pageSize));
-
+            return View(choice);
 
         }
         protected override void Dispose(bool disposing)

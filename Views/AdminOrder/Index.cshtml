@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TeaHouse.Models.OrderModels>
+
+@{
+    ViewBag.Title = "OrderView";
+}
+
+<h2>View Customer Orders</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Ordered Time
+        </th>
+        
+        <th>
+            Table
+        </th>
+        <th>
+            Order Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            
+
+            <td>
+
+                
+                
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                
+            </td>
+        </tr>
+    }
+
+</table>
+

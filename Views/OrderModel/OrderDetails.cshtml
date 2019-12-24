@@ -1,46 +1,45 @@
-﻿@model PagedList.IPagedList<TeaHouse.Models.Choice>
-@using PagedList.Mvc;
+﻿@model IEnumerable<TeaHouse.Models.Choice>
 
-<!@model IEnumerable<TeaHouse.Models.Choice>
+@{
+    ViewBag.Title = "OrderDetails";
+}
 
-    @{
-        ViewBag.Title = "OrderDetails";
-    }
+<h2>View Orders</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Product
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.SelectedFood.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SelectedFood.FoodType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SelectedFood.Price)
+    </td>
     
-    <table class="table">
-        <tr>
-            <th>
-                Product
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Price
-            </th>
-            <th></th>
-        </tr>
+</tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SelectedFood.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SelectedFood.FoodType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SelectedFood.Price)
-                </td>
-                <td>
+</table>
+<p>
 
-                    
-                </td>
-            </tr>
-        }
-
-    </table>
-
-    <br /> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    @Html.ActionLink("Back to Confirmed Orders", "OrderView")
+</p>
 

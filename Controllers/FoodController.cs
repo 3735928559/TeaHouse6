@@ -172,6 +172,7 @@ namespace TeaHouse.Controllers
             try
             {
                 Food food = db.FoodMenu.Find(id); db.FoodMenu.Remove(food);
+                
                 db.SaveChanges();
             }
             catch (RetryLimitExceededException /* dex */)

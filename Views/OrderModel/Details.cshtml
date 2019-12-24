@@ -1,4 +1,4 @@
-﻿@model TeaHouse.Models.OrderModels
+﻿@model TeaHouse.Models.Food
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>OrderModels</h4>
+    <h4>Food</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,20 +15,36 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OrderTime)
+            @Html.DisplayNameFor(model => model.FoodType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrderTime)
+            @Html.DisplayFor(model => model.FoodType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @Html.ActionLink("Back to List", "OrderView")
 </p>

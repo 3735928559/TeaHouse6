@@ -29,10 +29,14 @@
     
     <td>
 
-        @Html.ActionLink("Details", "OrderDetails", new { id = item.Id }) |
+        @Html.ActionLink("Details", "OrderDetails", new { id = item.Id }) 
 
     </td>
 </tr>
 }
 
 </table>
+<p>
+
+    @Html.ActionLink("Back to Home", "Index","Home")
+</p>

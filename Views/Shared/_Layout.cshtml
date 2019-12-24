@@ -21,21 +21,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && HttpContext.Current.User.Identity.Name != "Administrator")
                     {
                         <li>@Html.ActionLink("1.Select your Choice", "Index", "Choice")</li>
                         <li>@Html.ActionLink("2.Review your Order", "Index", "OrderModel")</li>
-                        <li>@Html.ActionLink("3.View Submitted Orders", "OrderView", "OrderModel")</li>
+                        <li>@Html.ActionLink("3.Review Confirmed Orders", "OrderView", "OrderModel")</li>
                     }
                     @if (HttpContext.Current.User.Identity.Name == "Administrator")
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("User Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
 
                         <li>@Html.ActionLink("Menu Administration", "Index", "Food")</li>
-
+                        <li>@Html.ActionLink("Order Administration", "Index", "AdminOrder")</li>
                     }
 
                 </ul>
