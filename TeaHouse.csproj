@@ -183,6 +183,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ApiChoiceController.cs" />
+    <Compile Include="Api\ApiFoodController.cs" />
+    <Compile Include="Api\ApiOrderController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
