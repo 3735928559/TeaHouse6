@@ -16,7 +16,7 @@ namespace TeaHouse.Controllers
         private OrderContext db = new OrderContext();
 
         // GET: Choice
-
+        [Authorize]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -52,10 +52,11 @@ namespace TeaHouse.Controllers
             int pageNumber = (page ?? 1);
             return View(food.ToPagedList(pageNumber, pageSize));
 
-            //return View(food.ToList());
+            
         }
 
         // GET: Choice/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -71,10 +72,8 @@ namespace TeaHouse.Controllers
         }
 
         // GET: Choice/Create
-        /*public ActionResult Create()
-        {
-            return View();
-        }*/
+        
+        [Authorize]
         public ActionResult Create(int? id, [Bind(Include = "Id,User,OrderTime,Status,Food")] Choice choice)
         {
             Food food = db.FoodMenu.Find(id);
@@ -111,6 +110,7 @@ namespace TeaHouse.Controllers
         }*/
 
         // GET: Choice/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +130,7 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,User,OrderTime,Status")] Choice choice)
         {
             if (ModelState.IsValid)
@@ -142,6 +143,7 @@ namespace TeaHouse.Controllers
         }
 
         // GET: Choice/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -159,6 +161,7 @@ namespace TeaHouse.Controllers
         // POST: Choice/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Choice choice = db.Choices.Find(id);

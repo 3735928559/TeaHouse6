@@ -16,17 +16,15 @@ namespace TeaHouse.Controllers
         private OrderContext db = new OrderContext();
 
         // GET: OrderModel
+        [Authorize]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             string _user = System.Web.HttpContext.Current.User.Identity.Name;
-            //var food = db.Choices.Include(c => c.SelectedFood);
-            //var food = db.Choices.Where(c => c.User.Equals(_user) && c.Status.Equals("Ordered")).ToList();
             var food = from c in db.Choices
                         where (c.User.Equals(_user) && c.Status.Equals("Ordered"))
                                
                         select c;
-            //return View(food.ToList());
-
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
             ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_asc" : "";
@@ -58,6 +56,7 @@ namespace TeaHouse.Controllers
         }
 
         // GET: OrderModel/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -73,6 +72,7 @@ namespace TeaHouse.Controllers
         }
 
         // GET: OrderModel/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -83,6 +83,7 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,User,OrderTime,Choices")] OrderModels orderModels)
         {
                   
@@ -90,19 +91,15 @@ namespace TeaHouse.Controllers
             {
                 db.OrderModels.Add(orderModels);
                 db.SaveChanges();
-                // orderModels.SelectedChoice.Status = "Confirmed";
-                //orderModels.SelectedChoice.OrderNum = orderModels.Id;
                 string _user = System.Web.HttpContext.Current.User.Identity.Name;
-                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("Update Choices SET OrderNum={orderModels.Id} WHERE User='{_user}' and Status='Ordered'");
-                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("Update Choices SET Status='Confirmed' WHERE User='{_user}' and Status='Ordered'");
                 
                 using (var ctx = new OrderContext())
                 { 
                     var sql = $"Update Choices SET OrderNum={orderModels.Id} WHERE [User]='{_user}' and Status='Ordered'";
                     ctx.Database.ExecuteSqlCommand(sql);
-                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand(sql);
+                
                     sql = $"Update Choices SET Status='Confirmed' WHERE [User]='{_user}' and Status='Ordered'";
-                //ViewBag.RowsAffected = db.Database.ExecuteSqlCommand(sql);
+                
                     ctx.Database.ExecuteSqlCommand(sql);
                     
                 }
@@ -115,8 +112,9 @@ namespace TeaHouse.Controllers
 
             return View(orderModels);
         }
-        
+
         // GET: OrderModel/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -136,6 +134,7 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
         {
             if (ModelState.IsValid)
@@ -148,6 +147,7 @@ namespace TeaHouse.Controllers
         }
 
         // GET: OrderModel/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -165,6 +165,7 @@ namespace TeaHouse.Controllers
         // POST: Choice/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Choice choice = db.Choices.Find(id);
@@ -173,6 +174,7 @@ namespace TeaHouse.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult OrderView()
         {
             string _user = System.Web.HttpContext.Current.User.Identity.Name;
@@ -180,10 +182,11 @@ namespace TeaHouse.Controllers
                        where (c.User.Equals(_user))
 
                        select c;
-            //var food = db.Choices.Where(c => c.User.Equals(_user) && c.Status.Equals("Ordered")).ToList();
+            
             return View(order);
         }
 
+        [Authorize]
         public ActionResult OrderDetails(int? id)
         {
             var choice = db.Choices.Where(o => o.OrderNum == id).ToList();

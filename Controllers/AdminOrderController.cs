@@ -10,6 +10,7 @@ using TeaHouse.Models;
 
 namespace TeaHouse.Controllers
 {
+    [Authorize(Users = "Administrator")]
     public class AdminOrderController : Controller
     {
         private OrderContext db = new OrderContext();
