@@ -4,39 +4,45 @@
     ViewBag.Title = "OrderView";
 }
 
-<h2>View Orders</h2>
-
+<h2>3.Review Confirmed Orders</h2>
+<hr />
+<h4>Here are your confirmed orders. Please be patient and your food would be available soon</h4>
+<h4>Or press "Details" for a detailed view on the confirmed order.</h4>
+<hr />
 
 <table class="table">
     <tr>
         <th>
-            Order Number
-        </th>
-        <th>
             Ordered Time
         </th>
+        <th>
+            Order Number
+        </th>
+        
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderTime)
-    </td>
-    
-    <td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            
 
-        @Html.ActionLink("Details", "OrderDetails", new { id = item.Id }) 
+            <td>
 
-    </td>
-</tr>
-}
+                @Html.ActionLink("Details", "OrderDetails", new { id = item.Id })
+
+            </td>
+        </tr>
+    }
 
 </table>
 <p>
 
-    @Html.ActionLink("Back to Home", "Index","Home")
+    @Html.ActionLink("Back to Home", "Index", "Home")
 </p>

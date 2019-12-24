@@ -2,24 +2,25 @@
 @using PagedList.Mvc; 
 
 <!@model IEnumerable<TeaHouse.Models.Food>
-    
+
 
     @{
         ViewBag.Title = "Tea House Menu Management";
     }
 
     <h2>Tea House Menu Management</h2>
-
+    <hr />
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-   
+    <hr />
     @using (Html.BeginForm("Index", "Food", FormMethod.Get))
     {
         <p>
             Search Keyword: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Search" />
         </p>
     }
+    <hr />
     <table class="table">
         <tr>
             <th>
@@ -60,7 +61,7 @@
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                    
+
                 </td>
             </tr>
         }
