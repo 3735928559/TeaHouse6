@@ -454,4 +454,3 @@ C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\bin\Microsoft.CodeDom.Provide
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.CopyComplete
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.Migrations.init.resources
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.GenerateResource.cache
-C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csprojAssemblyReference.cache

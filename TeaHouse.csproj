@@ -199,9 +199,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderModelController.cs" />
     <Compile Include="DAL\OrderContextInit.cs" />
-    <Compile Include="DTO\MenuDTO.cs" />
-    <Compile Include="DTO\MenuDTOController.cs" />
-    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

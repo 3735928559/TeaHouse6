@@ -191,6 +191,7 @@ namespace TeaHouse.Controllers
         {
             var choice = db.Choices.Where(o => o.OrderNum == id).ToList();
 
+               
             return View(choice);
 
         }
