@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Concept Tea House</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Concept Tea House", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && HttpContext.Current.User.Identity.Name != "Administrator")
+                    {
+                        <li>@Html.ActionLink("1.Select your Choice", "Index", "Choice")</li>
+                        <li>@Html.ActionLink("2.Review your Order", "Index", "OrderModel")</li>
+                        <li>@Html.ActionLink("3.Review Confirmed Orders", "OrderView", "OrderModel")</li>
+                    }
+                    @if (HttpContext.Current.User.Identity.Name == "Administrator")
+                    {
+                        <li>@Html.ActionLink("User Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+
+                        <li>@Html.ActionLink("Menu Administration", "Index", "Food")</li>
+                        <li>@Html.ActionLink("Order Administration", "Index", "AdminOrder")</li>
+                    }
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Concept Tea House</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
