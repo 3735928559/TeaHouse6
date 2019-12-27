@@ -98,7 +98,7 @@ namespace TeaHouse.Controllers
                     ctx.Database.ExecuteSqlCommand(sql);
 
                 }
-
+                orderModels.Status = "Fulfilled";
                 db.Entry(orderModels).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

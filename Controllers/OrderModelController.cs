@@ -90,6 +90,7 @@ namespace TeaHouse.Controllers
             if (ModelState.IsValid)
             {
                 db.OrderModels.Add(orderModels);
+                orderModels.Status = "Confirmed";
                 db.SaveChanges();
                 string _user = System.Web.HttpContext.Current.User.Identity.Name;
                 
@@ -104,7 +105,7 @@ namespace TeaHouse.Controllers
                     
                     
                 }
-
+                
                 return RedirectToAction("Index");
             }
             
@@ -180,7 +181,7 @@ namespace TeaHouse.Controllers
         {
             string _user = System.Web.HttpContext.Current.User.Identity.Name;
             var order = from c in db.OrderModels 
-                       where (c.User.Equals(_user) && !c.Status.Equals("Paid"))
+                       where (c.User.Equals(_user)) && (c.Status.Equals("Confirmed") || c.Status.Equals("Fulfilled"))
 
                        select c;
             

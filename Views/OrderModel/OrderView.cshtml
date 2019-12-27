@@ -18,7 +18,9 @@
         <th>
             Order Number
         </th>
-        
+        <th>
+            Order Status
+        </th>
 
         <th></th>
     </tr>
@@ -33,9 +35,9 @@
         @Html.DisplayFor(modelItem => item.Id)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Id)
+        @Html.DisplayFor(modelItem => item.Status)
     </td>
-   
+    
     <td>
 
         @Html.ActionLink("Details", "OrderDetails", new { id = item.Id })
