@@ -18,7 +18,7 @@ namespace TeaHouse.Controllers
         // GET: AdminOrder
         public ActionResult Index()
         {
-            
+
             
             return View(db.OrderModels);
         }
@@ -31,6 +31,8 @@ namespace TeaHouse.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            
             var choice = db.Choices.Where(o => o.OrderNum == id).ToList();
             
             return View(choice);
@@ -71,6 +73,10 @@ namespace TeaHouse.Controllers
             {
                 return HttpNotFound();
             }
+
+            
+            
+
             return View(orderModels);
         }
 
@@ -79,11 +85,65 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
+        public ActionResult Edit(int? id,[Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
         {
             if (ModelState.IsValid)
             {
+                string _user = System.Web.HttpContext.Current.User.Identity.Name;
+
+                using (var ctx = new OrderContext())
+                {
+                    var sql = $"Update Choices SET Status='Fulfilled' WHERE OrderNum={id}";
+
+                    ctx.Database.ExecuteSqlCommand(sql);
+
+                }
+
                 db.Entry(orderModels).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(orderModels);
+        }
+
+        public ActionResult Paid(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OrderModels orderModels = db.OrderModels.Find(id);
+            if (orderModels == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+
+            return View(orderModels);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Paid(int? id, [Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
+        {
+            if (ModelState.IsValid)
+            {
+                string _user = System.Web.HttpContext.Current.User.Identity.Name;
+
+                OrderModels orderModel2 = db.OrderModels.Find(id);
+                orderModel2.Status = "Paid";
+
+                using (var ctx = new OrderContext())
+                {
+                    var sql = $"Update Choices SET Status='Paid' WHERE OrderNum={id}";
+
+                    ctx.Database.ExecuteSqlCommand(sql);
+
+                }
+                
+                db.Entry(orderModel2).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -102,6 +102,7 @@ namespace TeaHouse.Controllers
                 
                     ctx.Database.ExecuteSqlCommand(sql);
                     
+                    
                 }
 
                 return RedirectToAction("Index");
@@ -178,8 +179,8 @@ namespace TeaHouse.Controllers
         public ActionResult OrderView()
         {
             string _user = System.Web.HttpContext.Current.User.Identity.Name;
-            var order = from c in db.OrderModels
-                       where (c.User.Equals(_user))
+            var order = from c in db.OrderModels 
+                       where (c.User.Equals(_user) && !c.Status.Equals("Paid"))
 
                        select c;
             

@@ -23,8 +23,8 @@ namespace TeaHouse.Models
             set { _date = value; }
         }
         public virtual Choice SelectedChoice { get; set; }
-        
-        
+
+        public string Status { get; set; }
 
        
 

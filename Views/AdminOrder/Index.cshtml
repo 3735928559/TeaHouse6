@@ -12,13 +12,14 @@
         <th>
             Ordered Time
         </th>
-        
+
         <th>
             Table
         </th>
         <th>
             Order Number
         </th>
+        
         <th></th>
     </tr>
 
@@ -38,10 +39,11 @@
 
             <td>
 
-                
-                
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-                
+
+
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Order Fulfilled", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Order Paid", "Paid", new { id = item.Id })
             </td>
         </tr>
     }
