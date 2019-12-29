@@ -24,21 +24,26 @@
             <th>
                 Type
             </th>
+            
             <th>
                 Price
             </th>
             <th></th>
         </tr>
 
+        
         @foreach (var item in Model)
         {
+            
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.SelectedFood.Name)
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SelectedFood.FoodType)
                 </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.SelectedFood.Price)
                 </td>
@@ -47,9 +52,9 @@
                     @Html.ActionLink("Remove", "Delete", new { id = item.Id })
                 </td>
             </tr>
-        }
+            }
 
     </table>
-    <h3>Total : $@Model.Sum(x => x.SelectedFood.Price)</h3>
+    <h3>Total : @Model.Count() items, $@Model.Sum(x => x.SelectedFood.Price)</h3>
     <br /> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
