@@ -39,6 +39,7 @@
                 @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
 
             </th>
+            <th>Available</th>
             <th></th>
         </tr>
 
@@ -58,9 +59,12 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.isActive)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                    
 
                 </td>
             </tr>

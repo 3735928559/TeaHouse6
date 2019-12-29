@@ -35,6 +35,7 @@ namespace TeaHouse.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var food = from s in db.FoodMenu select s;
+            food = food.Where(s => s.isActive.Equals(true));
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -48,6 +49,8 @@ namespace TeaHouse.Controllers
                 case "price_asc": food = food.OrderBy(s => s.Price); break;
                 default: food = food.OrderBy(s => s.Name); break;
             }
+
+            
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(food.ToPagedList(pageNumber, pageSize));

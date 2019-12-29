@@ -85,7 +85,7 @@ namespace TeaHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,FoodType,Detail,Price")] Food food)
+        public ActionResult Create([Bind(Include = "Id,Name,FoodType,Detail,Price,isActive")] Food food)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +126,7 @@ namespace TeaHouse.Controllers
 
             var foodToUpdate = db.FoodMenu.Find(id);
 
-            if (TryUpdateModel(foodToUpdate, "", new string[] { "Name", "FoodType", "Detail", "Price" }))
+            if (TryUpdateModel(foodToUpdate, "", new string[] { "Name", "FoodType", "Detail", "Price","isActive" }))
             {
                 try
                 {
@@ -144,7 +144,7 @@ namespace TeaHouse.Controllers
 
 
         // GET: Food/Delete/5
-        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        /*public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -162,12 +162,12 @@ namespace TeaHouse.Controllers
                 return HttpNotFound();
             }
             return View(food);
-        }
+        }*/
 
         // POST: Food/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        /*public ActionResult Delete(int id)
         {
             try
             {
@@ -175,12 +175,12 @@ namespace TeaHouse.Controllers
                 
                 db.SaveChanges();
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (RetryLimitExceededException /* dex *//*)
             { //Log the error (uncomment dex variable name and add a line here to write a log. 
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
+        }*/
 
 
         protected override void Dispose(bool disposing)
