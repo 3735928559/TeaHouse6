@@ -106,7 +106,7 @@ namespace TeaHouse.Controllers
                     
                 }
                 
-                return RedirectToAction("Index");
+                return RedirectToAction("OrderView");
             }
             
             
