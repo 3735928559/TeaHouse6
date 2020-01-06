@@ -403,6 +403,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\AdminOrder\Paid.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\AdminOrder\Cancelled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

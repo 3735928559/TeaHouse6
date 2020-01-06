@@ -150,6 +150,51 @@ namespace TeaHouse.Controllers
             return View(orderModels);
         }
 
+        public ActionResult Cancelled(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OrderModels orderModels = db.OrderModels.Find(id);
+            if (orderModels == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+
+            return View(orderModels);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Cancelled(int? id, [Bind(Include = "Id,User,OrderTime")] OrderModels orderModels)
+        {
+            if (ModelState.IsValid)
+            {
+                string _user = System.Web.HttpContext.Current.User.Identity.Name;
+                
+                OrderModels orderModel2 = db.OrderModels.Find(id);
+                
+                    orderModel2.Status = "Cancelled";
+
+                    using (var ctx = new OrderContext())
+                    {
+                        var sql = $"Update Choices SET Status='Cancelled' WHERE OrderNum={id}";
+
+                        ctx.Database.ExecuteSqlCommand(sql);
+
+                    }
+
+                    db.Entry(orderModel2).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            
+            return View(orderModels);
+        }
         // GET: AdminOrder/Delete/5
         public ActionResult Delete(int? id)
         {
