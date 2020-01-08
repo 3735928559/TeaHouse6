@@ -14,7 +14,7 @@
     <h4>Or press “Details” for a detailed view of the item.</h4>
     <hr />
 
-    @using (Html.BeginForm("Index", "Food", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Choice", FormMethod.Get))
     {
         <p>
             Search Keyword: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Search" />
