@@ -15,8 +15,10 @@ namespace TeaHouse.Controllers
     {
         private OrderContext db = new OrderContext();
 
-        // GET: Choice
+        
         [Authorize]
+                
+        // GET: Choice
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -82,6 +84,7 @@ namespace TeaHouse.Controllers
             Food food = db.FoodMenu.Find(id);
             choice.SelectedFood = food;
             choice.Status = "Ordered";
+            
             if (ModelState.IsValid)
             {
                 db.Choices.Add(choice);
