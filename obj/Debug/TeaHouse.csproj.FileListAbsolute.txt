@@ -454,3 +454,6 @@ C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.Gen
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.csproj.CopyComplete
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.dll
 C:\Users\AC185324\Documents\DBCourseWork\TeaHouse6\obj\Debug\TeaHouse.pdb
+C:\Users\athlon\Documents\GitHub\TeaHouse6\obj\Debug\TeaHouse.csprojAssemblyReference.cache
+C:\Users\athlon\Documents\GitHub\TeaHouse6\obj\Debug\TeaHouse.Migrations.init.resources
+C:\Users\athlon\Documents\GitHub\TeaHouse6\obj\Debug\TeaHouse.csproj.GenerateResource.cache
